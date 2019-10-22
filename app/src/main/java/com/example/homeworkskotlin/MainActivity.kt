@@ -10,8 +10,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        go_button.setOnClickListener{
-            intent = Intent(applicationContext, MainActivity::class.java)
+        btn_go_main.setOnClickListener{
+            intent = Intent(applicationContext, HiddenIntentSender::class.java)
             startActivity(intent)
         }
     }

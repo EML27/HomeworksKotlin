@@ -8,7 +8,7 @@
 
     <TextView
 
-        android:id="@+id/textView"
+        android:id="@+id/tv_greetings_main"
         android:layout_width="77dp"
         android:layout_height="19dp"
         android:layout_marginStart="8dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/go_button"
+        android:id="@+id/btn_go_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,6 +31,6 @@
         android:text="Let's go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_greetings_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
