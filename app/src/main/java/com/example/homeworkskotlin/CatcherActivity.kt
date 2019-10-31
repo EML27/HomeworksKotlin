@@ -12,7 +12,7 @@ class CatcherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catcher)
 val intent: Intent = intent
-        val text=intent.extras.get(Intent.EXTRA_TEXT).toString()
+        val text=intent.extras?.get(Intent.EXTRA_TEXT).toString()
         tv_catcher.text=text
     }
 }

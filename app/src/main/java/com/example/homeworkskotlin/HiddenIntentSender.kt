@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_hidden_intent_sender.*
-
+private const val SEND_REQUEST =1
 class HiddenIntentSender : AppCompatActivity() {
 
-    val SEND_REQUEST =1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hidden_intent_sender)
