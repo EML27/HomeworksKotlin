@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         go_button.setOnClickListener{
-            intent = Intent(applicationContext, MainActivity::class.java)
+            intent = Intent(applicationContext, RecyclerActivity::class.java)
             startActivity(intent)
         }
     }
