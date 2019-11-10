@@ -1,8 +1,8 @@
 package com.example.homeworkskotlin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         go_button.setOnClickListener{
-            intent = Intent(applicationContext, MainActivity::class.java)
+            intent = Intent(applicationContext, NavigationActivity::class.java)
             startActivity(intent)
         }
     }
