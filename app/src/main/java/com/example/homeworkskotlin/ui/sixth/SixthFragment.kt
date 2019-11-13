@@ -28,4 +28,6 @@ class SixthFragment : Fragment() {
         var gender = bundle?.getString("gender") ?: "default gender"
         tv_the_truth.text = "Lol, $name $surname, u r not $gender, u gay"
     }
+
+
 }
