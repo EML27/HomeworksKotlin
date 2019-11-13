@@ -1,7 +1,7 @@
 package com.example.homeworkskotlin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_recycler.*
 
 class RecyclerActivity : AppCompatActivity() {
@@ -11,7 +11,7 @@ class RecyclerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler)
 
-        adapter = GameAdapter(GameLIstGenerator().getGamesList()) { game ->
+        adapter = GameAdapter(GameListGenerator.getGamesList()) { game ->
             startActivity(
                 GamePageActivity.createIntent(
                     this,

@@ -6,24 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".GamePageActivity">
 
-<ImageView
-    android:id="@+id/img_main"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/rdr2pic"
-    app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/img_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rdr2pic"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tv_main_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/img_main"
         android:text="Title 1"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/img_main" />
+
     <TextView
         android:id="@+id/tv_main_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_name"
         android:text="Type"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

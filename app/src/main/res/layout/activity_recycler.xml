@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecyclerActivity">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_games"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/game_item"
-        tools:itemCount="2"/>
+        tools:itemCount="2"
+        tools:listitem="@layout/game_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

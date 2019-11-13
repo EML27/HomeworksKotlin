@@ -1,6 +1,6 @@
 package com.example.homeworkskotlin
 
-class GameLIstGenerator {
+object GameListGenerator {
     fun getGamesList(): List<Game> {
         val resList = ArrayList<Game>()
 

@@ -11,13 +11,13 @@ class GameItemHolder(
     override val containerView: View,
     private val clickLambda: (Game) -> Unit
 ) :
-    RecyclerView.ViewHolder(containerView), LayoutContainer {
 
+    RecyclerView.ViewHolder(containerView), LayoutContainer {
     fun bind(game: Game) {
+
         tv_name.text = game.name
         tv_type.text = game.type
         img_game.setImageResource(game.picSrcId)
-
         itemView.setOnClickListener {
             clickLambda(game)
         }

@@ -3,17 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="72dp"
     android:background="?android:attr/selectableItemBackground"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
     <ImageView
         android:id="@+id/img_game"
-        android:src="@drawable/rdr2pic"
         android:layout_width="50dp"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:src="@drawable/rdr2pic"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
@@ -36,7 +39,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img_game"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
-        tools:text="Author" />
-
+        tools:text="Genre" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
