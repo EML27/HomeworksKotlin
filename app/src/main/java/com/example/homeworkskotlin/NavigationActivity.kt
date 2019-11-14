@@ -17,6 +17,7 @@ import com.example.homeworkskotlin.ui.home.HomeFragment
 import com.example.homeworkskotlin.ui.send.SendFragment
 import com.example.homeworkskotlin.ui.slideshow.SlideshowFragment
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.content_navigation.*
 
 class NavigationActivity : AppCompatActivity() {
@@ -29,14 +30,15 @@ class NavigationActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val drawer =
-            findViewById<DrawerLayout>(R.id.drawer_layout)//(заменить на котлин экстеншен. Для наглядности)
+        val drawer = drawer_layout
+
         val toggle = ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
+        goToFragment(HomeFragment())
 
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -88,6 +90,7 @@ class NavigationActivity : AppCompatActivity() {
         when {
             drawer.isDrawerOpen(GravityCompat.START) -> drawer.closeDrawer(GravityCompat.START)
             supportFragmentManager.backStackEntryCount > 0 -> supportFragmentManager.popBackStack()
+
             else -> super.onBackPressed()
 
         }

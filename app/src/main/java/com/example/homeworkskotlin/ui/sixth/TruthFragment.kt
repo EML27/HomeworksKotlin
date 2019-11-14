@@ -9,13 +9,14 @@ import com.example.homeworkskotlin.R
 import kotlinx.android.synthetic.main.fragment_sixth.*
 
 
-class SixthFragment : Fragment() {
+class TruthFragment : Fragment() {
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.title = "The truth"
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sixth, container, false)
     }

@@ -15,7 +15,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        activity?.title = "Home"
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 

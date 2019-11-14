@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.homeworkskotlin.R
-import com.example.homeworkskotlin.ui.fifth.FifthFragment
+import com.example.homeworkskotlin.ui.fifth.InputFragment
 import kotlinx.android.synthetic.main.content_navigation.*
 import kotlinx.android.synthetic.main.fragment_send.*
 
@@ -19,7 +19,7 @@ class SendFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
+        activity?.title = "Send"
         val root = inflater.inflate(R.layout.fragment_send, container, false)
 
 
@@ -30,8 +30,8 @@ class SendFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         open_new_frag_btn.setOnClickListener {
             val tr = fragmentManager?.beginTransaction()
-            tr?.replace(nav_host_fragment.id, FifthFragment())
-            tr?.addToBackStack(null)
+            tr?.replace(nav_host_fragment.id, InputFragment())
+            tr?.addToBackStack("")
             tr?.commit()
         }
     }
