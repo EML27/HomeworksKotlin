@@ -1,5 +1,8 @@
 package com.example.homeworkskotlin
 
-class Creature {
-    //TODO todo todo tod todo todo todooooooooooo todududu
-}
+data class Creature(
+    var avatarPic: Int,
+    var name: String,
+    var description: String,
+    var resources: List<Int>
+)

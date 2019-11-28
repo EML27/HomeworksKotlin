@@ -39,10 +39,8 @@ class FirstRVItemAdapter(var dataSrc: ArrayList<God>) : RecyclerView.Adapter<Fir
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirstRVItemHolder =
         FirstRVItemHolder.create(parent) {
-
             godsList.deleteGod(it)
             updateRV()
-
         }
 
     fun updateRV() {
