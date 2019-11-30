@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrackActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cover_activity_img"
+        android:layout_width="match_parent"
+        android:layout_height="412dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/examplePic" />
+
+    <TextView
+        android:id="@+id/tv_song_name_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cover_activity_img"
+        android:text="Gachimuchi OST"
+        android:textSize="25sp"
+        android:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/tv_song_author_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_song_name_activity"
+        android:text="God"
+        android:textSize="20sp"
+        android:layout_margin="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cover_activity_img">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/previous_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_media_previous" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/pause_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_media_pause" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_media_next" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
