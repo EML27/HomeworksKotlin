@@ -11,7 +11,7 @@
         android:layout_width="65dp"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:src="@drawable/examplePic"
+        android:src="@drawable/example_pic"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

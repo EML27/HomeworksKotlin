@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MusicListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/track_item"
-        tools:itemCount="10" />
+        tools:itemCount="10"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
