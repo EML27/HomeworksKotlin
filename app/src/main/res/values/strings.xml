@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">HomeworksKotlin</string>
+
+    <string name="music_player_notification_title_template">Music player: %1$s</string>
+
+
+    <string name="action_share">Share</string>
+    <string name="action_reply">Reply</string>
 </resources>

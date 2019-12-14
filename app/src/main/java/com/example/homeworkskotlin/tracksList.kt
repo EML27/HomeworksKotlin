@@ -25,7 +25,7 @@ object tracksList {
             Track(
                 "Lonely boy",
                 "The black keys",
-                R.raw.howyoulikemenow_theheavy,
+                R.raw.lonelyboy_tbk,
                 R.drawable.theblackkeys_cover
             )
         )
@@ -59,5 +59,8 @@ object tracksList {
 
     fun getPosition(track: Track) =
         list.indexOf(track)
+
+    fun getTrackByNumber(num: Int) =
+        list[num]
 
 }

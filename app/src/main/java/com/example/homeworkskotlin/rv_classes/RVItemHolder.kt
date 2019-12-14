@@ -9,19 +9,22 @@ import com.example.homeworkskotlin.Track
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.track_item.*
 
-class RVItemHolder(override val containerView: View, private val clickLambda: (Track) -> Unit) :
+class RVItemHolder(
+    override val containerView: View,
+    private val clickLambda: (Track, View) -> Unit
+) :
     RecyclerView.ViewHolder(containerView), LayoutContainer {
     fun bind(track: Track) {
         tv_song_name.text = track.name
         tv_song_author.text = track.author
         cover_img.setImageResource(track.coverSrc)
         itemView.setOnClickListener {
-            clickLambda(track)
+            clickLambda(track, cover_img)
         }
     }
 
     companion object {
-        fun create(parent: ViewGroup, clickLambda: (Track) -> Unit) = RVItemHolder(
+        fun create(parent: ViewGroup, clickLambda: (Track, View) -> Unit) = RVItemHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.track_item, parent, false
             ), clickLambda

@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:src="@drawable/example_pic"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:transitionName="cover" />
 
     <TextView
         android:id="@+id/tv_song_name"
