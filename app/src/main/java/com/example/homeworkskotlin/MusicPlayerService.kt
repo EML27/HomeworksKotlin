@@ -1,10 +1,16 @@
 package com.example.homeworkskotlin
 
+import android.app.NotificationChannel.DEFAULT_CHANNEL_ID
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
+import androidx.core.app.NotificationCompat
 
 class MusicPlayerService : Service() {
 
@@ -35,41 +41,75 @@ class MusicPlayerService : Service() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-    fun setTrack(track: Track) {
+    private fun setTrack(track: Track) {
         songPos = tracksList.getPosition(track)
         currentTrack = track
         stopMusic()
         mediaPlayer = MediaPlayer.create(this, currentTrack.src)
         playMusic()
+        setNotification()
     }
 
-    fun playMusic() {
+    private fun playMusic() {
         mediaPlayer?.start()
-
+        setNotification()
     }
 
-    fun pauseMusic() {
+    private fun pauseMusic() {
         mediaPlayer?.pause()
-
+        setNotification()
     }
 
-    fun stopMusic() {
+    private fun stopMusic() {
         mediaPlayer?.stop()
         mediaPlayer = null
-
+        setNotification()
     }
 
-    fun nextTrack() {
+    private fun nextTrack() {
         songPos++
         setTrack(tracksList.getTrackByNumber(songPos))
     }
 
-    fun previousTrack() {
+    private fun previousTrack() {
         songPos--
         setTrack(tracksList.getTrackByNumber(songPos))
     }
 
-    fun musicIsPlaying(): Boolean? = mediaPlayer?.isPlaying
+    private fun musicIsPlaying(): Boolean = mediaPlayer?.isPlaying ?: false
 
+    private fun setNotification() {
+        val track = currentTrack
+        //Нагло украдено
+        val getIntent =
+            { action: String -> Intent(this, MusicPlayerService::class.java).setAction(action) }
+        val getPendingIntent =
+            { action: String -> PendingIntent.getService(this, 0, getIntent(action), 0) }
 
+        val currentStateIcon: Int
+        val currentStateCommand: String
+        val currentStateTitle: String
+        if (musicIsPlaying()) {
+            currentStateIcon = R.drawable.ic_pause
+            currentStateCommand = Commands.STOP
+            currentStateTitle = "Pause"
+        } else {
+            currentStateIcon = R.drawable.ic_play
+            currentStateCommand = Commands.START
+            currentStateTitle = "Play"
+        }
+        val notification = NotificationCompat.Builder(this, DEFAULT_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_play)
+            .setContentTitle(track.name)
+            .setContentText(track.author)
+            .setLargeIcon(BitmapFactory.decodeResource(resources, track.coverSrc))
+            .addAction(R.drawable.ic_prev, "Previous", getPendingIntent(Commands.PREV))
+            .addAction(currentStateIcon, currentStateTitle, getPendingIntent(currentStateCommand))
+            .addAction(R.drawable.ic_next, "Next", getPendingIntent(Commands.NEXT))
+            .build()
+
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(1, notification)
+    }
 }
