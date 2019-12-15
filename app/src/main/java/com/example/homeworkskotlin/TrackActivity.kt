@@ -9,39 +9,32 @@ import kotlinx.android.synthetic.main.activity_track.*
 class TrackActivity : AppCompatActivity() {
     //    var bound: Boolean = false
     // var playerService: MusicPlayerService? = null
-    private var musicIsPlaying = false
+    private var musicIsPlaying = true
+    private lateinit var currentTrack: Track
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_track)
         var track = tracksList.getData()[intent?.extras?.getInt(TRACK_POSITION) ?: 0]
-        tv_song_name_activity.text =
-            track.name
-        tv_song_author_activity.text =
-            track.author
-        cover_activity_img.setImageResource(
-            track.coverSrc
-        )
+        currentTrack = track
+        setTrackViews(currentTrack)
 
 
         // playerService?.setTrack(track)
-        startService(Intent(this, MusicPlayerService::class.java).apply {
-            putExtra("track position", TRACK_POSITION)
-            action = Commands.START
-            musicIsPlaying = true
-        })
+
+        startTrack(track)
 //        playerService = MusicPlayerService.create(this)
 //        bound=true
 
 
         pause_btn.setOnClickListener {
             if (!musicIsPlaying) {
-                startServiceWithCommand(Commands.PAUSE)
+                startServiceWithCommand(Commands.START)
                 pause_btn.setImageResource(R.drawable.ic_pause)
 
                 musicIsPlaying = true
             } else {
-                startServiceWithCommand(Commands.START)
+                startServiceWithCommand(Commands.PAUSE)
                 pause_btn.setImageResource(R.drawable.ic_play)
                 musicIsPlaying = false
             }
@@ -49,14 +42,15 @@ class TrackActivity : AppCompatActivity() {
         }
 
         next_btn.setOnClickListener {
-            startServiceWithCommand(Commands.NEXT)
-            musicIsPlaying = true
-
+            currentTrack = tracksList.getTrackByNumber(tracksList.getPosition(currentTrack) + 1)
+            startTrack(currentTrack)
+            setTrackViews(currentTrack)
         }
 
         previous_btn.setOnClickListener {
-            startServiceWithCommand(Commands.PREV)
-            musicIsPlaying = true
+            currentTrack = tracksList.getTrackByNumber(tracksList.getPosition(currentTrack) - 1)
+            startTrack(currentTrack)
+            setTrackViews(currentTrack)
         }
     }
 
@@ -91,5 +85,23 @@ class TrackActivity : AppCompatActivity() {
 
     private fun startServiceWithCommand(command: String) {
         startService(Intent(this, MusicPlayerService::class.java).apply { action = command })
+    }
+
+    private fun startTrack(track: Track) {
+        startService(Intent(this, MusicPlayerService::class.java).apply {
+            putExtra("track pos", tracksList.getPosition(track))
+            action = Commands.START
+            musicIsPlaying = true
+        })
+    }
+
+    private fun setTrackViews(track: Track) {
+        tv_song_name_activity.text =
+            track.name
+        tv_song_author_activity.text =
+            track.author
+        cover_activity_img.setImageResource(
+            track.coverSrc
+        )
     }
 }

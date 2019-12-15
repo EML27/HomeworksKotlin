@@ -60,7 +60,14 @@ object tracksList {
     fun getPosition(track: Track) =
         list.indexOf(track)
 
-    fun getTrackByNumber(num: Int) =
-        list[num]
+    fun getTrackByNumber(num: Int): Track {
+        if (num >= list.size) {
+            return list[0]
+        }
+        if (num < 0) {
+            return list[list.size - 1]
+        }
+        return list[num]
+    }
 
 }
