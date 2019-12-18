@@ -6,4 +6,6 @@
 
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>
+    <string name="notification_channel_name">player notification</string>
+    <string name="notification_channel_description">musical player</string>
 </resources>

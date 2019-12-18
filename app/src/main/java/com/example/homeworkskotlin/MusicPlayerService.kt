@@ -1,6 +1,6 @@
 package com.example.homeworkskotlin
 
-import android.app.NotificationChannel.DEFAULT_CHANNEL_ID
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 
@@ -19,6 +20,7 @@ class MusicPlayerService : Service() {
     var currentTrack: Track = tracksList.getData()[0]
 
     var mBinder = MyBinder()
+    private val CHANNEL_ID = "27"
 
     override fun onBind(intent: Intent?): IBinder? = mBinder
 
@@ -98,7 +100,25 @@ class MusicPlayerService : Service() {
             currentStateCommand = Commands.START
             currentStateTitle = "Play"
         }
-        val notification = NotificationCompat.Builder(this, DEFAULT_CHANNEL_ID)
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.notification_channel_name)
+            val descriptionText = getString(R.string.notification_channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel =
+                notificationManager.getNotificationChannel(CHANNEL_ID) ?: NotificationChannel(
+                    CHANNEL_ID,
+                    name,
+                    importance
+                ).apply {
+                    description = descriptionText
+                }
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_play)
             .setContentTitle(track.name)
             .setContentText(track.author)
@@ -108,8 +128,6 @@ class MusicPlayerService : Service() {
             .addAction(R.drawable.ic_next, "Next", getPendingIntent(Commands.NEXT))
             .build()
 
-        val notificationManager: NotificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(1, notification)
     }
 }
