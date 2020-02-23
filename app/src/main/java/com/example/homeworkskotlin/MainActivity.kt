@@ -1,18 +1,20 @@
 package com.example.homeworkskotlin
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+
+    private lateinit var service: WeatherService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        go_button.setOnClickListener{
-            intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
-        }
+//        go_button.setOnClickListener{
+//            intent = Intent(applicationContext, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+        service = ApiFactory.weatherService
+        service.weatherByName("Kazan")
     }
 }
