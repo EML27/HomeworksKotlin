@@ -18,22 +18,23 @@ object ApiFactory {
         chain.proceed(newRequest)
     }
 
-    private val client = OkHttpClient().newBuilder()
-        .addInterceptor(authInterceptor)
-        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        .build()
+    private val client by lazy {
+        OkHttpClient().newBuilder()
+            .addInterceptor(authInterceptor)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .build()
+    }
 
-    private val retrofit: Retrofit = Retrofit.Builder()
-        .client(client)
-        .baseUrl(BuildConfig.API_ENDPOINT)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .client(client)
+            .baseUrl(BuildConfig.API_ENDPOINT)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
     //val githubService : GithubService = retrofit().create(GithubService::class.java)
     val weatherService: WeatherService by lazy {
         retrofit.create(WeatherService::class.java)
     }
-
-
 }
