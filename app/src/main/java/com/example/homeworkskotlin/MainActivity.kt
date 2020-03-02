@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.view.Menu
@@ -16,12 +17,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import java.util.*
 
-class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+
+class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by MainScope() {
 
 
     private lateinit var service: WeatherService
 
     private lateinit var lm: LocationManager
+    // The minimum distance to change Updates in meters
+    private val MIN_DISTANCE_CHANGE_FOR_UPDATES: Float = 10.toFloat() // 10 meters
+
+
+    // The minimum time between updates in milliseconds
+    private val MIN_TIME_BW_UPDATES = 1000 * 60 * 1 // 1 minute
+        .toLong()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +42,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
             checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         ) {
-            location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            lm.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                MIN_TIME_BW_UPDATES,
+                MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                this
+            )
+            location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 //            Toast.makeText(this, "location realisation block accessed", Toast.LENGTH_SHORT).show()
         }
         service = ApiFactory.weatherService
@@ -118,5 +133,21 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             )
             this.requestPermissions(permissions, 0)
         }
+    }
+
+    override fun onLocationChanged(location: Location?) {
+
+    }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+
+    }
+
+    override fun onProviderEnabled(provider: String?) {
+
+    }
+
+    override fun onProviderDisabled(provider: String?) {
+
     }
 }
