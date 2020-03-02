@@ -24,7 +24,7 @@ class DetailedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         launch {
             val response = withContext(Dispatchers.IO) {
-                service.weatherById(intent.extras.getInt(CITY_ID), "metric")
+                service.weatherById(intent.extras.getInt(CITY_ID))
             }
 
             city_detailed_name_tv.text = response.name

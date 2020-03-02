@@ -58,8 +58,7 @@ class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by Ma
                 service.weatherInNearbyCities(
                     location?.longitude ?: 0.0,
                     location?.latitude ?: 0.0,
-                    20,
-                    "metric"
+                    20
                 )
             }
             if (response.isSuccessful) {

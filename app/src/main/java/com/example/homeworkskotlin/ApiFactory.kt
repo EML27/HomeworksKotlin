@@ -11,6 +11,7 @@ object ApiFactory {
     private val authInterceptor = Interceptor { chain ->
         // better use separate classes for Interceptors
         val newUrl = chain.request().url().newBuilder()
+            .addQueryParameter("units", "metric")
             .addQueryParameter("appid", BuildConfig.API_KEY)
             .build()
 
