@@ -62,14 +62,14 @@ class DetailedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         var windOrientation = "gay"
         var x = response.wind.deg
         when {
-            x < 30 || x >= 330 -> windOrientation = "East"
+            x < 30 || x >= 330 -> windOrientation = "North"
             x < 60 -> windOrientation = "Northeast"
-            x < 120 -> windOrientation = "North"
-            x < 150 -> windOrientation = "Northwest"
-            x < 210 -> windOrientation = "West"
+            x < 120 -> windOrientation = "East"
+            x < 150 -> windOrientation = "Southeast"
+            x < 210 -> windOrientation = "South"
             x < 240 -> windOrientation = "Southwest"
-            x < 300 -> windOrientation = "South"
-            x < 330 -> windOrientation = "Southeast"
+            x < 300 -> windOrientation = "West"
+            x < 330 -> windOrientation = "Northwest"
         }
         list.add(DataPair("Wind orientation", windOrientation))
         list.add(DataPair("Humidity", response.main.humidity.toString() + "%"))

@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import java.util.*
 
-
 class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by MainScope() {
 
 
