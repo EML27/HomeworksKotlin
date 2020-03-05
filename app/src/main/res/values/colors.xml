@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorLightPrimary">#BBDEFB</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+
+
+    <color name="tempColdAsFuk">#0474b7</color>
+    <color name="tempVeryCold">#3c96cb</color>
+    <color name="tempCold">#80b9db</color>
+    <color name="tempCool">#d3e7f2</color>
+    <color name="tempWarm">#fbf548</color>
+    <color name="tempHot">#fab10a</color>
+    <color name="tempVeryHot">#ee621b</color>
+    <color name="tempHotDog">#eb2920</color>
+
 </resources>
