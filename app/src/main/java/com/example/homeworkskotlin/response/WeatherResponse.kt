@@ -2,7 +2,6 @@ package com.example.homeworkskotlin.response
 
 import com.google.gson.annotations.SerializedName
 
-
 data class WeatherResponse(
     @SerializedName("base")
     var base: String,

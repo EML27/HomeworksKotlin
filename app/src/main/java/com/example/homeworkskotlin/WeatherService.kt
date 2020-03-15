@@ -12,7 +12,11 @@ interface WeatherService {
     suspend fun weatherByName(@Query("q") name: String): WeatherResponse
 
     @GET("find")
-    suspend fun weatherInNearbyCities(@Query("lon") lon: Double, @Query("lat") lat: Double, @Query("cnt") cnt: Int): Response<WeatherList>
+    suspend fun weatherInNearbyCities(
+        @Query("lon") lon: Double,
+        @Query("lat") lat: Double,
+        @Query("cnt") cnt: Int
+    ): Response<WeatherList>
 
     @GET("weather")
     suspend fun weatherById(@Query("id") id: Int): WeatherResponse

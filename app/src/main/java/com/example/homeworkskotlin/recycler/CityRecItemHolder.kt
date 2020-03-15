@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeworkskotlin.R
+import com.example.homeworkskotlin.TempHelper
 import com.example.homeworkskotlin.response.WeatherResponse
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.rec_item.*
@@ -20,18 +21,18 @@ class CityRecItemHolder(
     fun bind(wr: WeatherResponse) {
 
         city_name_tv.text = wr.name
-        temp_tv.text = (wr.main.temp).toString() + " ℃"
-        val x = wr.main.temp.toInt()
+        temp_tv.text = wr.main.temp.toString() + " ℃"
+        val currentTemperature = wr.main.temp.toInt()
         var chosenColor = R.color.colorSecondaryText
         when {
-            x < -40 -> chosenColor = R.color.tempColdAsFuk
-            x < -30 && x >= -40 -> chosenColor = R.color.tempVeryCold
-            x < -10 && x >= -30 -> chosenColor = R.color.tempCold
-            x < 5 && x >= -10 -> chosenColor = R.color.tempCool
-            x in 5..14 -> chosenColor = R.color.tempWarm
-            x in 15..24 -> chosenColor = R.color.tempHot
-            x in 25..34 -> chosenColor = R.color.tempVeryHot
-            x >= 35 -> chosenColor = R.color.tempHotDog
+            currentTemperature < TempHelper.CAF.maxTemp -> chosenColor = R.color.tempColdAsFuk
+            currentTemperature < TempHelper.VC.maxTemp -> chosenColor = R.color.tempVeryCold
+            currentTemperature < TempHelper.COLD.maxTemp -> chosenColor = R.color.tempCold
+            currentTemperature < TempHelper.COOL.maxTemp -> chosenColor = R.color.tempCool
+            currentTemperature < TempHelper.WARM.maxTemp -> chosenColor = R.color.tempWarm
+            currentTemperature < TempHelper.HOT.maxTemp -> chosenColor = R.color.tempHot
+            currentTemperature < TempHelper.VH.maxTemp -> chosenColor = R.color.tempVeryHot
+            currentTemperature >= TempHelper.VH.maxTemp -> chosenColor = R.color.tempHotDog
         }
         temp_tv.setTextColor(getColor(containerView.context, chosenColor))
         itemView.setOnClickListener {

@@ -3,13 +3,24 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.gitlab.arturbosch.detekt'
 
+ext {
+    API_KEY = ''
+}
+
+if ("true" == System.getenv("CI")) {
+    def key = System.getenv("OPEN_WEATHER_KEY")
+    API_KEY = "\"$key\""
+} else {
+    API_KEY = apiKey
+}
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.example.homeworkskotlin"
         minSdkVersion 27
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,8 +36,8 @@ android {
         it.buildConfigField 'String', 'API_KEY', apiKey
     }
     compileOptions {
-        sourceCompatibility = "1.8"
-        targetCompatibility = "1.8"
+        sourceCompatibility = kotlin_version
+        targetCompatibility = kotlin_version
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -61,4 +72,18 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
 
     implementation 'com.github.bumptech.glide:glide:4.6.1'
+}
+
+detekt {
+    failFast = true // fail build on any finding
+    buildUponDefaultConfig = true // preconfigure defaults
+    config = files("$rootDir/config/detekt/detekt.yml")
+    // point to your custom config defining rules to run, overwriting default behavior
+
+    reports {
+        html.enabled = true // observe findings in your browser with structure and code snippets
+        xml.enabled = false // checkstyle like format mainly for integrations like Jenkins
+        txt.enabled = false
+        // similar to the console output, contains issue signature to manually edit baseline files
+    }
 }

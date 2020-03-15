@@ -15,21 +15,23 @@ import com.example.homeworkskotlin.response.WeatherResponse
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import java.io.IOException
 import java.util.*
 
-
+@Suppress("LateinitUsage")
 class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by MainScope() {
 
 
     private lateinit var service: WeatherService
 
     private lateinit var lm: LocationManager
+
     // The minimum distance to change Updates in meters
-    private val MIN_DISTANCE_CHANGE_FOR_UPDATES: Float = 10.toFloat() // 10 meters
+    private val minDistanceChangeForUpdates: Float = 10.toFloat() // 10 meters
 
 
     // The minimum time between updates in milliseconds
-    private val MIN_TIME_BW_UPDATES = 1000 * 60 * 1 // 1 minute
+    private val minTimeBwUpdates = 60000  // 1 minute
         .toLong()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +46,8 @@ class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by Ma
         ) {
             lm.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
-                MIN_TIME_BW_UPDATES,
-                MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                minTimeBwUpdates,
+                minDistanceChangeForUpdates,
                 this
             )
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
@@ -75,8 +77,8 @@ class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by Ma
         //https://www.geeksforgeeks.org/android-searchview-with-example/
         //https://spin.atomicobject.com/2019/11/11/how-to-create-a-searchview-with-suggestions-in-kotlin/
         menuInflater.inflate(R.menu.menu, menu)
-        var searchBarItem = menu?.findItem(R.id.search_bar)
-        var searchBar = searchBarItem?.actionView as SearchView
+        val searchBarItem = menu?.findItem(R.id.search_bar)
+        val searchBar = searchBarItem?.actionView as SearchView
 
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -92,7 +94,7 @@ class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by Ma
                         val cityId = response.id
 
                         startActivity(DetailedActivity.createIntent(this@MainActivity, cityId))
-                    } catch (e: Exception) {
+                    } catch (e: IOException) {
                         Snackbar.make(
                             findViewById(android.R.id.content),
                             "Cannot find this city",
