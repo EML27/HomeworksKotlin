@@ -15,7 +15,6 @@ import com.example.homeworkskotlin.response.WeatherResponse
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-import java.io.IOException
 import java.util.*
 
 @Suppress("LateinitUsage")
@@ -94,7 +93,7 @@ class MainActivity : LocationListener, AppCompatActivity(), CoroutineScope by Ma
                         val cityId = response.id
 
                         startActivity(DetailedActivity.createIntent(this@MainActivity, cityId))
-                    } catch (e: IOException) {
+                    } catch (e: Exception) {
                         Snackbar.make(
                             findViewById(android.R.id.content),
                             "Cannot find this city",
